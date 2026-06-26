@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content Yeasin Tech Verse - Premium tech education platform">
+  <title>Yeasin Tech Verse | Future of Learning</title>
+  
+  <!-- Preconnect for faster loading -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://www.googleapis.com">
+  <link rel="preconnect" href="https://i.ytimg.com">
+  
+  <style>
+    /* Critical CSS */
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root{
+      --primary:#6e45e2;
+      --secondary:#88d3ce;
+      --bg-light:#f8f9fc;
+      --bg-dark:#0c0c14;
+      --text-light:#1e1e2f;
+      --text-dark:#f0f0f8;
+      --glass-light:rgba(255,255,255,0.6);
+      --glass-dark:rgba(20,20,30,0.7);
+    }
+    body{
+      font-family:system-ui,-apple-system,'Segoe UI',sans-serif;
+      background:var(--bg-light);
+      color:var(--text-light);
+      transition:background 0.3s,color 0.3s;
+      line-height:1.6;
+      overflow-x:hidden;
+      min-height:100vh;
+    }
+    body.dark{
+      background:var(--bg-dark);
+      color:var(--text-dark);
+    }
+    .container{
+      max-width:1300px;
+      margin:0 auto;
+      padding:0 1.5rem;
+    }
+    
+    /* Glass effect */
+    .glass{
+      background:var(--glass-light);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+      border:1px solid rgba(255,255,255,0.3);
+      border-radius:1.2rem;
+      box-shadow:0 4px 16px rgba(0,0,0,0.08);
+    }
+    body.dark .glass{
+      background:var(--glass-dark);
+      border-color:rgba(255,255,255,0.08);
+      box-shadow:0 4px 16px rgba(0,0,0,0.4);
+    }
+    
+    /* Navbar */
+    .navbar{
+      position:sticky;
+      top:0;
+      z-index:100;
+      padding:0.8rem 0;
+      background:rgba(248,249,252,0.85);
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(0,0,0,0.05);
+    }
+    body.dark .navbar{
+      background:rgba(12,12,20,0.85);
+      border-bottom:1px solid rgba(255,255,255,0.05);
+    }
+    .nav-container{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:1rem;
+    }
+    .logo{
+      font-size:1.5rem;
+      font-weight:800;
+      background:linear-gradient(135deg,#6e45e2,#88d3ce);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+      display:flex;
+      align-items:center;
+      gap:0.3rem;
+      cursor:pointer;
+    }
+    .nav-links{
+      display:flex;
+      gap:1.2rem;
+      align-items:center;
+    }
+    .nav-links a{
+      color:inherit;
+      text-decoration:none;
+      font-weight:600;
+      font-size:0.9rem;
+      transition:color 0.2s;
+      padding:0.3rem 0;
+      cursor:pointer;
+    }
+    .nav-links a:hover{
+      color:var(--primary);
+    }
+    .btn{
+      padding:0.6rem 1.5rem;
+      border-radius:2rem;
+      font-weight:600;
+      border:none;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:0.4rem;
+      background:linear-gradient(135deg,#6e45e2,#88d3ce);
+      color:white;
+      transition:transform 0.2s,box-shadow 0.2s;
+      text-decoration:none;
+      font-size:0.9rem;
+    }
+    .btn:hover{
+      transform:translateY(-2px);
+      box-shadow:0 8px 20px rgba(110,69,226,0.35);
+    }
+    .btn-outline{
+      background:transparent;
+      border:2px solid var(--primary);
+      color:var(--primary);
+    }
+    body.dark .btn-outline{
+      color:#c3b1ff;
+      border-color:#c3b1ff;
+    }
+    
+    /* Cards */
+    .card{
+      padding:1.5rem;
+      transition:transform 0.2s;
+      cursor:pointer;
+    }
+    .card:hover{
+      transform:translateY(-4px);
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
+      gap:1.5rem;
+      margin:2rem 0;
+    }
+    
+    /* Hero */
+    .hero{
+      padding:3rem 0;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      gap:2rem;
+    }
+    .hero-content h1{
+      font-size:clamp(2rem,5vw,3.2rem);
+      line-height:1.2;
+      font-weight:800;
+    }
+    .gradient-text{
+      background:linear-gradient(135deg,#6e45e2,#88d3ce);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+    }
+    
+    /* Video thumbnail */
+    .video-thumb{
+      width:100%;
+      border-radius:0.8rem;
+      aspect-ratio:16/9;
+      object-fit:cover;
+      background:#e0e0e0;
+    }
+    body.dark .video-thumb{
+      background:#2a2a35;
+    }
+    
+    /* Skeleton loader */
+    .skeleton{
+      background:#e8e8ee;
+      border-radius:0.8rem;
+      height:180px;
+      animation:pulse 1.5s ease-in-out infinite;
+    }
+    body.dark .skeleton{
+      background:#2a2a35;
+    }
+    @keyframes pulse{
+      0%,100%{opacity:0.6}
+      50%{opacity:1}
+    }
+    
+    /* Toast */
+    .toast{
+      position:fixed;
+      bottom:2rem;
+      right:2rem;
+      background:linear-gradient(135deg,#6e45e2,#88d3ce);
+      color:white;
+      padding:0.8rem 1.5rem;
+      border-radius:2rem;
+      font-weight:600;
+      z-index:9999;
+      opacity:0;
+      transition:opacity 0.3s;
+      pointer-events:none;
+    }
+    .toast.show{
+      opacity:1;
+    }
+    
+    /* Back to top */
+    .back-to-top{
+      position:fixed;
+      bottom:2rem;
+      left:2rem;
+      background:rgba(255,255,255,0.8);
+      backdrop-filter:blur(8px);
+      width:40px;
+      height:40px;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      opacity:0;
+      transition:opacity 0.3s;
+      z-index:99;
+      border:1px solid rgba(0,0,0,0.1);
+    }
+    body.dark .back-to-top{
+      background:rgba(30,30,40,0.8);
+      border-color:rgba(255,255,255,0.1);
+    }
+    .back-to-top.visible{
+      opacity:1;
+    }
+    
+    /* Sidebar */
+    .sidebar{
+      position:fixed;
+      top:0;
+      left:-280px;
+      width:270px;
+      height:100vh;
+      background:rgba(255,255,255,0.95);
+      backdrop-filter:blur(20px);
+      z-index:200;
+      padding:2rem 1.5rem;
+      transition:left 0.3s ease;
+      box-shadow:5px 0 25px rgba(0,0,0,0.15);
+      display:flex;
+      flex-direction:column;
+      gap:1.5rem;
+      overflow-y:auto;
+    }
+    body.dark .sidebar{
+      background:rgba(15,15,22,0.95);
+    }
+    .sidebar.open{
+      left:0;
+    }
+    .sidebar a{
+      font-weight:600;
+      text-decoration:none;
+      color:inherit;
+      padding:0.6rem 0;
+      border-bottom:1px solid rgba(0,0,0,0.05);
+      cursor:pointer;
+    }
+    .sidebar-close{
+      align-self:flex-end;
+      background:none;
+      border:none;
+      font-size:1.5rem;
+      cursor:pointer;
+      color:inherit;
+    }
+    
+    /* Footer */
+    .footer{
+      margin-top:4rem;
+      padding:2rem 0;
+      text-align:center;
+      border-top:1px solid rgba(0,0,0,0.08);
+    }
+    
+    /* Search input */
+    .search-input{
+      padding:0.8rem 1.2rem;
+      width:100%;
+      border:none;
+      outline:none;
+      font-size:1rem;
+      background:transparent;
+      color:inherit;
+    }
+    .search-input::placeholder{
+      color:inherit;
+      opacity:0.5;
+    }
+    
+    /* Filter buttons */
+    .filter-btn{
+      padding:0.4rem 1rem;
+      border-radius:1.5rem;
+      border:1px solid rgba(0,0,0,0.2);
+      background:transparent;
+      cursor:pointer;
+      font-size:0.85rem;
+      transition:all 0.2s;
+      color:inherit;
+    }
+    .filter-btn.active{
+      background:var(--primary);
+      color:white;
+      border-color:var(--primary);
+    }
+    
+    /* Mobile responsive */
+    @media(max-width:768px){
+      .nav-links{display:none}
+      .hero{flex-direction:column;text-align:center}
+      .grid{grid-template-columns:1fr}
+      .container{padding:0 1rem}
+      .filter-container{flex-wrap:wrap}
+    }
+    
+    .menu-toggle,.theme-toggle{
+      background:none;
+      border:none;
+      font-size:1.3rem;
+      cursor:pointer;
+      color:inherit;
+      padding:0.3rem;
+    }
+    
+    .error-message{
+      text-align:center;
+      padding:2rem;
+      color:#ff6b6b;
+    }
+    
+    .category-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+      gap:1rem;
+      margin:1rem 0;
+    }
+
+    .loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(110, 69, 226, 0.3);
+      border-radius: 50%;
+      border-top-color: var(--primary);
+      animation: spin 0.8s linear infinite;
+      margin: 2rem auto;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+  
+  <!-- Font Awesome async -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" media="print" onload="this.media='all'">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Toast -->
+  <div id="toast" class="toast">✨ Done</div>
+  
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <button class="sidebar-close" onclick="toggleSidebar()">✕</button>
+    <a onclick="navigate('home');toggleSidebar()">🏠 Home</a>
+    <a onclick="navigate('videos');toggleSidebar()">🎬 Videos</a>
+    <a onclick="navigate('categories');toggleSidebar()">📂 Categories</a>
+    <a onclick="navigate('roadmaps');toggleSidebar()">🗺️ Roadmaps</a>
+    <a onclick="navigate('resources');toggleSidebar()">📚 Resources</a>
+    <a onclick="navigate('about');toggleSidebar()">ℹ️ About</a>
+    <a onclick="navigate('contact');toggleSidebar()">✉️ Contact</a>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <div class="logo" onclick="navigate('home')">
+        <span>⚡</span> Yeasin Tech Verse
+      </div>
+      <div class="nav-links" id="navLinks">
+        <a onclick="navigate('home')">Home</a>
+        <a onclick="navigate('videos')">Videos</a>
+        <a onclick="navigate('roadmaps')">Roadmaps</a>
+        <a onclick="navigate('resources')">Resources</a>
+        <a onclick="navigate('about')">About</a>
+      </div>
+      <div style="display:flex;align-items:center;gap:0.5rem;">
+        <button class="theme-toggle" onclick="toggleTheme()" id="themeIcon" aria-label="Toggle theme">
+          <i class="fas fa-moon"></i>
+        </button>
+        <button class="menu-toggle" onclick="toggleSidebar()" aria-label="Menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main id="app" class="container"></main>
+
+  <!-- Footer -->
+  <footer class="footer glass">
+    <p>© 2026 YEASIN TECHVERSE · Built for speed & learning</p>
+  </footer>
+
+  <!-- Back to Top -->
+  <div class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+
+  <script>
+    // ==================== CONFIGURATION ====================
+    // YouTube API Key - Complete key
+    const YOUTUBE_API_KEY = 'AIzaSyA74UH0NhvOTlWx8FiwWa_gZeNNKSWXz6k';
+    
+    // Programming categories with proper search queries
+    const CATEGORIES = {
+      'HTML': 'HTML tutorial for beginners',
+      'CSS': 'CSS tutorial web development',
+      'JavaScript': 'JavaScript programming tutorial',
+      'TypeScript': 'TypeScript tutorial',
+      'Python': 'Python programming tutorial',
+      'Java': 'Java programming tutorial',
+      'C++': 'C++ programming tutorial',
+      'React': 'React JS tutorial',
+      'Node.js': 'Node JS tutorial backend',
+      'AI': 'Artificial Intelligence tutorial',
+      'Cyber Security': 'Cyber Security tutorial',
+      'Cloud Computing': 'Cloud Computing tutorial',
+      'Docker': 'Docker tutorial',
+      'Git': 'Git tutorial version control',
+      'Flutter': 'Flutter tutorial mobile development',
+      'Machine Learning': 'Machine Learning tutorial',
+      'Data Science': 'Data Science tutorial',
+      'API': 'API development tutorial REST',
+      'SQL': 'SQL database tutorial',
+      'MongoDB': 'MongoDB tutorial',
+      'Linux': 'Linux tutorial for beginners'
+    };
+    
+    // ==================== STATE MANAGEMENT ====================
+    let currentPage = 'home';
+    let currentCategory = 'all';
+    let currentFilter = 'relevance';
+    let darkMode = localStorage.getItem('darkMode') === 'true';
+    let bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]');
+    let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+    let recentlyWatched = JSON.parse(localStorage.getItem('recentlyWatched') || '[]');
+    let searchTimeout = null;
+    let nextPageToken = null;
+    
+    // Apply dark mode
+    if (darkMode) document.body.classList.add('dark');
+    updateThemeIcon();
+    
+    // ==================== NAVIGATION ====================
+    function navigate(page, params = {}) {
+      currentPage = page;
+      renderPage(page, params);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (window.innerWidth < 768) {
+        document.getElementById('sidebar').classList.remove('open');
+      }
+    }
+    
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('open');
+    }
+    
+    function toggleTheme() {
+      darkMode = !darkMode;
+      document.body.classList.toggle('dark', darkMode);
+      localStorage.setItem('darkMode', darkMode);
+      updateThemeIcon();
+    }
+    
+    function updateThemeIcon() {
+      const icon = document.querySelector('#themeIcon i');
+      if (icon) {
+        icon.className = darkMode ? 'fas fa-sun' : 'fas fa-moon';
+      }
+    }
+    
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      clearTimeout(t._timeout);
+      t._timeout = setTimeout(() => t.classList.remove('show'), 2500);
+    }
+    
+    // Back to top
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const btn = document.getElementById('backToTop');
+          if (btn) btn.classList.toggle('visible', window.scrollY > 400);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+    
+    // ==================== YOUTUBE API - COMPLETE FIX ====================
+    async function fetchYouTubeVideos(query, maxResults = 12) {
+      try {
+        const searchQuery = query || 'programming tutorial';
+        
+        // Build API URL
+        const url = new URL('https://www.googleapis.com/youtube/v3/search');
+        url.searchParams.append('part', 'snippet');
+        url.searchParams.append('maxResults', maxResults.toString());
+        url.searchParams.append('q', searchQuery);
+        url.searchParams.append('type', 'video');
+        url.searchParams.append('videoEmbeddable', 'true');
+        url.searchParams.append('relevanceLanguage', 'en');
+        url.searchParams.append('key', YOUTUBE_API_KEY);
+        
+        // Add order parameter
+        if (currentFilter === 'date') {
+          url.searchParams.append('order', 'date');
+        } else if (currentFilter === 'viewCount') {
+          url.searchParams.append('order', 'viewCount');
+        } else {
+          url.searchParams.append('order', 'relevance');
+        }
+        
+        // Add page token for pagination
+        if (nextPageToken) {
+          url.searchParams.append('pageToken', nextPageToken);
+        }
+        
+        console.log('🔍 Fetching videos:', searchQuery);
+        
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10000);
+        
+        const response = await fetch(url.toString(), { signal: controller.signal });
+        clearTimeout(timeoutId);
+        
+        if (!response.ok) {
+          const errorData = await response.json();
+          console.error('API Error:', errorData);
+          throw new Error(errorData.error?.message || `HTTP ${response.status}`);
+        }
+        
+        const data = await response.json();
+        
+        // Save next page token
+        nextPageToken = data.nextPageToken || null;
+        
+        if (!data.items || data.items.length === 0) {
+          console.warn('No videos found for:', searchQuery);
+          return [];
+        }
+        
+        console.log(`✅ Found ${data.items.length} videos`);
+        
+        // Get video details (duration, view count)
+        const videoIds = data.items.map(item => item.id.videoId).join(',');
+        let videoDetails = {};
+        
+        if (videoIds) {
+          try {
+            const detailsUrl = new URL('https://www.googleapis.com/youtube/v3/videos');
+            detailsUrl.searchParams.append('part', 'contentDetails,statistics');
+            detailsUrl.searchParams.append('id', videoIds);
+            detailsUrl.searchParams.append('key', YOUTUBE_API_KEY);
+            
+            const detailsResponse = await fetch(detailsUrl.toString());
+            if (detailsResponse.ok) {
+              const detailsData = await detailsResponse.json();
+              if (detailsData.items) {
+                detailsData.items.forEach(item => {
+                  videoDetails[item.id] = {
+                    duration: item.contentDetails?.duration || 'N/A',
+                    viewCount: item.statistics?.viewCount || '0',
+                    likeCount: item.statistics?.likeCount || '0'
+                  };
+                });
+              }
+            }
+          } catch (detailsError) {
+            console.warn('Could not fetch video details:', detailsError);
+          }
+        }
+        
+        // Map and return formatted videos
+        return data.items.map(item => ({
+          id: item.id.videoId,
+          title: item.snippet.title,
+          channelTitle: item.snippet.channelTitle,
+          description: item.snippet.description,
+          publishedAt: item.snippet.publishedAt,
+          thumbnails: item.snippet.thumbnails,
+          duration: videoDetails[item.id.videoId]?.duration || 'N/A',
+          viewCount: videoDetails[item.id.videoId]?.viewCount || '0',
+          likeCount: videoDetails[item.id.videoId]?.likeCount || '0'
+        }));
+        
+      } catch (error) {
+        console.error('❌ Fetch error:', error);
+        if (error.name === 'AbortError') {
+          showToast('⏰ Request timed out. Please try again.');
+        } else {
+          showToast('❌ Error loading videos. Check console.');
+        }
+        return [];
+      }
+    }
+    
+    // Format duration from ISO 8601
+    function formatDuration(isoDuration) {
+      if (!isoDuration || isoDuration === 'N/A') return '';
+      
+      const match = isoDuration.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+      if (!match) return '';
+      
+      const hours = parseInt(match[1] || 0);
+      const minutes = parseInt(match[2] || 0);
+      const seconds = parseInt(match[3] || 0);
+      
+      if (hours > 0) {
+        return `${hours}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      }
+      return `${minutes}:${String(seconds).padStart(2, '0')}`;
+    }
+    
+    // Format view count
+    function formatViews(views) {
+      const count = parseInt(views);
+      if (isNaN(count)) return '0 views';
+      if (count >= 1000000) return `${(count / 1000000).toFixed(1)}M views`;
+      if (count >= 1000) return `${(count / 1000).toFixed(1)}K views`;
+      return `${count} views`;
+    }
+    
+    // Format date
+    function formatDate(dateString) {
+      if (!dateString) return '';
+      const date = new Date(dateString);
+      const now = new Date();
+      const diff = now - date;
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      
+      if (days === 0) return 'Today';
+      if (days === 1) return 'Yesterday';
+      if (days < 7) return `${days} days ago`;
+      if (days < 30) return `${Math.floor(days / 7)} weeks ago`;
+      if (days < 365) return `${Math.floor(days / 30)} months ago`;
+      return `${Math.floor(days / 365)} years ago`;
+    }
+    
+    // ==================== PAGE RENDERERS ====================
+    function renderPage(page, params = {}) {
+      const app = document.getElementById('app');
+      if (!app) return;
+      
+      requestAnimationFrame(() => {
+        switch(page) {
+          case 'home':
+            app.innerHTML = renderHome();
+            setTimeout(() => loadHomeVideos(), 300);
+            break;
+          case 'videos':
+            app.innerHTML = renderVideos();
+            setTimeout(() => loadVideoGrid('programming tutorial'), 300);
+            break;
+          case 'watch':
+            const videoId = params.videoId || recentlyWatched[0] || 'dQw4w9WgXcQ';
+            app.innerHTML = renderWatch(videoId);
+            addToRecentlyWatched(videoId);
+            setTimeout(() => loadRelatedVideos(videoId), 300);
+            break;
+          case 'categories':
+            app.innerHTML = renderCategories();
+            break;
+          case 'roadmaps':
+            app.innerHTML = renderRoadmaps();
+            break;
+          case 'resources':
+            app.innerHTML = renderResources();
+            break;
+          case 'about':
+            app.innerHTML = renderAbout();
+            break;
+          case 'contact':
+            app.innerHTML = renderContact();
+            break;
+          default:
+            app.innerHTML = render404();
+        }
+      });
+    }
+    
+    function renderHome() {
+      return `
+        <section class="hero">
+          <div class="hero-content">
+            <h1 class="gradient-text">Master Tech Skills.<br>Shape the Future.</h1>
+            <p style="font-size:1.1rem;margin:1.2rem 0;opacity:0.9;">
+              Premium educational platform with curated programming tutorials, 
+              roadmaps, and resources for modern developers.
+            </p>
+            <button class="btn" onclick="navigate('videos')">
+              ▶ Start Learning Now
+            </button>
+          </div>
+          <div style="flex:1;text-align:center;min-width:200px;">
+            <div style="font-size:8rem;opacity:0.8;">🚀</div>
+          </div>
+        </section>
+        
+        <h2 style="margin-top:2rem;">🔥 Trending Programming Videos</h2>
+        <div class="grid" id="trendingGrid">
+          ${generateSkeletons(4)}
+        </div>
+        
+        <h2>📂 Popular Categories</h2>
+        <div class="category-grid">
+          ${Object.keys(CATEGORIES).slice(0, 12).map(cat => `
+            <div class="card glass" onclick="navigate('videos');setTimeout(()=>searchCategory('${cat}'),200)" style="text-align:center;">
+              <h3>${cat}</h3>
+              <p style="opacity:0.7;font-size:0.85rem;">Learn ${cat}</p>
+            </div>
+          `).join('')}
+        </div>
+        
+        <div class="glass" style="padding:2rem;margin:2rem 0;text-align:center;">
+          <h3>💡 Daily Programming Quote</h3>
+          <p style="font-style:italic;font-size:1.1rem;">"${getRandomQuote()}"</p>
+        </div>
+        
+        <h2>📊 Learning Statistics</h2>
+        <div class="grid">
+          <div class="card glass" style="text-align:center;">
+            <h3>500+</h3>
+            <p>Video Tutorials</p>
+          </div>
+          <div class="card glass" style="text-align:center;">
+            <h3>20+</h3>
+            <p>Categories</p>
+          </div>
+          <div class="card glass" style="text-align:center;">
+            <h3>10+</h3>
+            <p>Roadmaps</p>
+          </div>
+          <div class="card glass" style="text-align:center;">
+            <h3>24/7</h3>
+            <p>Access</p>
+          </div>
+        </div>
+      `;
+    }
+    
+    function renderVideos() {
+      return `
+        <h2>🎬 Video Library</h2>
+        
+        <!-- Search Bar -->
+        <div class="glass" style="margin:1rem 0;">
+          <input 
+            type="text" 
+            placeholder="🔍 Search any programming topic... (e.g., JavaScript, Python, React)" 
+            oninput="handleSearch(this.value)"
+            class="search-input"
+            id="searchInput"
+          >
+        </div>
+        
+        <!-- Filters -->
+        <div style="display:flex;gap:0.5rem;margin:1rem 0;flex-wrap:wrap;" class="filter-container">
+          <button class="filter-btn active" onclick="setFilter('relevance', this)">Most Relevant</button>
+          <button class="filter-btn" onclick="setFilter('date', this)">Newest First</button>
+          <button class="filter-btn" onclick="setFilter('viewCount', this)">Most Viewed</button>
+        </div>
+        
+        <!-- Category Quick Filters -->
+        <div style="display:flex;gap:0.5rem;margin:1rem 0;flex-wrap:wrap;">
+          <button class="filter-btn" onclick="searchCategory('JavaScript')">JavaScript</button>
+          <button class="filter-btn" onclick="searchCategory('Python')">Python</button>
+          <button class="filter-btn" onclick="searchCategory('React')">React</button>
+          <button class="filter-btn" onclick="searchCategory('AI')">AI/ML</button>
+          <button class="filter-btn" onclick="searchCategory('Cyber Security')">Cyber Security</button>
+          <button class="filter-btn" onclick="searchCategory('all')">All Topics</button>
+        </div>
+        
+        <!-- Video Grid -->
+        <div class="grid" id="videoGrid">
+          <div class="loading-spinner"></div>
+        </div>
+        
+        <!-- Load More -->
+        <div style="text-align:center;margin:2rem 0;">
+          <button class="btn" onclick="loadMoreVideos()" id="loadMoreBtn">
+            📥 Load More Videos
+          </button>
+        </div>
+      `;
+    }
+    
+    function renderWatch(videoId) {
+      return `
+        <h2>📺 Now Watching</h2>
+        <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:1rem;margin:1rem 0;" class="glass">
+          <iframe 
+            id="youtubePlayer"
+            src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1" 
+            style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:1rem;" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen
+          ></iframe>
+        </div>
+        
+        <!-- Action Buttons -->
+        <div style="display:flex;gap:0.8rem;margin:1rem 0;flex-wrap:wrap;">
+          <button class="btn" onclick="bookmarkVideo('${videoId}')" id="bookmarkBtn">
+            ${bookmarks.includes(videoId) ? '🔖 Bookmarked' : '🔖 Bookmark'}
+          </button>
+          <button class="btn" onclick="favoriteVideo('${videoId}')" id="favoriteBtn">
+            ${favorites.includes(videoId) ? '❤️ Favorited' : '❤️ Favorite'}
+          </button>
+          <button class="btn-outline" onclick="copyShareLink('${videoId}')">
+            🔗 Share Link
+          </button>
+          <button class="btn-outline" onclick="watchPrevious()">
+            ⬅ Previous
+          </button>
+          <button class="btn-outline" onclick="watchNext()">
+            Next ➡
+          </button>
+        </div>
+        
+        <!-- Video Description -->
+        <div class="glass" style="padding:1.5rem;margin:1rem 0;" id="videoDescription">
+          <p>Loading description...</p>
+        </div>
+        
+        <h3>📹 Related Videos</h3>
+        <div class="grid" id="relatedGrid">
+          ${generateSkeletons(4)}
+        </div>
+      `;
+    }
+    
+    function renderCategories() {
+      return `
+        <h2>📂 All Programming Categories</h2>
+        <div class="category-grid">
+          ${Object.keys(CATEGORIES).map(cat => `
+            <div class="card glass" onclick="navigate('videos');setTimeout(()=>searchCategory('${cat}'),200)" style="text-align:center;">
+              <h3>${cat}</h3>
+              <p style="opacity:0.7;font-size:0.85rem;">${CATEGORIES[cat]}</p>
+              <button class="btn" style="margin-top:0.5rem;width:100%;">Browse →</button>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+    
+    function renderRoadmaps() {
+      const roadmaps = [
+        {name:'Frontend Development',steps:'HTML → CSS → JavaScript → React → TypeScript'},
+        {name:'Backend Development',steps:'Node.js → Express → Databases → APIs → Docker'},
+        {name:'Python Developer',steps:'Python Basics → OOP → Django/Flask → Data Science → AI'},
+        {name:'Mobile Development',steps:'Dart → Flutter → Firebase → State Management → Publishing'},
+        {name:'Cyber Security',steps:'Networking → Linux → Security Tools → Ethical Hacking → Certifications'},
+        {name:'Data Science',steps:'Python → Statistics → Pandas → ML → Deep Learning'},
+        {name:'DevOps',steps:'Linux → Git → Docker → Kubernetes → CI/CD → Cloud'},
+        {name:'Full Stack',steps:'HTML/CSS → JavaScript → React → Node.js → Database → Deployment'}
+      ];
+      
+      return `
+        <h2>🗺️ Learning Roadmaps</h2>
+        <div class="grid">
+          ${roadmaps.map(r => `
+            <div class="card glass">
+              <h3>${r.name}</h3>
+              <p style="opacity:0.8;font-size:0.9rem;margin:0.5rem 0;">${r.steps}</p>
+              <button class="btn" style="width:100%;" onclick="navigate('videos');setTimeout(()=>searchCategory('${r.name.split(' ')[0]}'),200)">
+                Start Learning →
+              </button>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+    
+    function renderResources() {
+      const resources = [
+        {name:'Git Cheat Sheet',icon:'📋',desc:'All essential Git commands'},
+        {name:'Docker Commands',icon:'🐳',desc:'Docker CLI reference'},
+        {name:'VS Code Extensions',icon:'🔌',desc:'Best extensions for devs'},
+        {name:'Interview Questions',icon:'💼',desc:'Top programming questions'},
+        {name:'Code Snippets',icon:'📝',desc:'Useful code snippets'},
+        {name:'Best APIs',icon:'🔗',desc:'Free APIs for projects'},
+        {name:'Practice Platforms',icon:'💻',desc:'Coding challenge sites'},
+        {name:'Programming Books',icon:'📚',desc:'Must-read dev books'}
+      ];
+      
+      return `
+        <h2>📚 Resources & Cheat Sheets</h2>
+        <div class="grid">
+          ${resources.map(r => `
+            <div class="card glass">
+              <div style="font-size:2rem;">${r.icon}</div>
+              <h3>${r.name}</h3>
+              <p style="opacity:0.7;font-size:0.9rem;">${r.desc}</p>
+              <button class="btn" style="width:100%;margin-top:0.5rem;" onclick="showToast('📥 ${r.name} downloaded successfully!')">
+                📥 Download
+              </button>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+    
+    function renderAbout() {
+      return `
+        <div class="glass" style="padding:2.5rem;margin-top:2rem;">
+          <h2>ℹ️ About YEASIN TECHVERSE</h2>
+          <p style="margin-top:1rem;">
+            YEASIN TECHVERSE is a premium educational platform designed for developers 
+            and tech enthusiasts. We curate the best programming tutorials from YouTube 
+            and organize them into structured learning paths.
+          </p>
+          <h3 style="margin-top:1.5rem;">Features:</h3>
+          <ul style="margin-top:0.5rem;padding-left:1.5rem;">
+            <li>✅ Curated video tutorials from YouTube</li>
+            <li>✅ Learning roadmaps for career paths</li>
+            <li>✅ Resource downloads & cheat sheets</li>
+            <li>✅ Bookmark & favorites system</li>
+            <li>✅ Dark/Light mode toggle</li>
+            <li>✅ Mobile responsive design</li>
+            <li>✅ Keyboard shortcuts</li>
+            <li>✅ Glassmorphism UI</li>
+          </ul>
+        </div>
+      `;
+    }
+    
+    function renderContact() {
+      return `
+        <div class="glass" style="padding:2.5rem;margin-top:2rem;">
+          <h2>✉️ Contact Us</h2>
+          <p style="margin-top:1rem;">📧 Email: yeasin.dev.bd@gmail.com</p>
+          <p>🐦 Twitter: @yeasintechverse</p>
+          <p>💬 Discord: Join our community</p>
+          <p>📺 YouTube: YEASIN TECHVERSE</p>
+        </div>
+      `;
+    }
+    
+    function render404() {
+      return `
+        <div style="text-align:center;padding:4rem 1rem;">
+          <h1 style="font-size:4rem;">404</h1>
+          <p style="font-size:1.2rem;">Page not found</p>
+          <button class="btn" onclick="navigate('home')" style="margin-top:1rem;">
+            🏠 Go Home
+          </button>
+        </div>
+      `;
+    }
+    
+    // ==================== HELPER FUNCTIONS ====================
+    function generateSkeletons(count) {
+      return Array(count).fill('<div class="skeleton"></div>').join('');
+    }
+    
+    function getRandomQuote() {
+      const quotes = [
+        "First, solve the problem. Then, write the code. - John Johnson",
+        "Code is like humor. When you have to explain it, it's bad. - Cory House",
+        "Experience is the name everyone gives to their mistakes. - Oscar Wilde",
+        "The best way to predict the future is to invent it. - Alan Kay",
+        "Programming isn't about what you know; it's about what you can figure out. - Chris Pine"
+      ];
+      return quotes[Math.floor(Math.random() * quotes.length)];
+    }
+    
+    // ==================== VIDEO LOADING FUNCTIONS ====================
+    async function loadHomeVideos() {
+      const grid = document.getElementById('trendingGrid');
+      if (!grid) return;
+      
+      const videos = await fetchYouTubeVideos('trending programming tutorials 2024', 4);
+      if (videos.length === 0) {
+        grid.innerHTML = '<div class="error-message">⚠️ Unable to load videos. Please check your API key quota or try again later.</div>';
+        return;
+      }
+      grid.innerHTML = videos.map(v => createVideoCard(v)).join('');
+    }
+    
+    async function loadVideoGrid(query) {
+      const grid = document.getElementById('videoGrid');
+      if (!grid) return;
+      
+      nextPageToken = null; // Reset pagination
+      const videos = await fetchYouTubeVideos(query, 8);
+      
+      if (videos.length === 0) {
+        grid.innerHTML = '<div class="error-message">⚠️ No videos found. Try a different search term or check API quota.</div>';
+        return;
+      }
+      
+      grid.innerHTML = videos.map(v => createVideoCard(v)).join('');
+      
+      // Show/hide load more button
+      const loadMoreBtn = document.getElementById('loadMoreBtn');
+      if (loadMoreBtn) {
+        loadMoreBtn.style.display = nextPageToken ? 'inline-flex' : 'none';
+      }
+    }
+    
+    async function loadRelatedVideos(videoId) {
+      const grid = document.getElementById('relatedGrid');
+      if (!grid) return;
+      
+      const videos = await fetchYouTubeVideos('related programming tutorial', 4);
+      if (videos.length === 0) {
+        grid.innerHTML = '<div class="error-message">⚠️ No related videos found.</div>';
+        return;
+      }
+      grid.innerHTML = videos.map(v => createVideoCard(v)).join('');
+      
+      // Also load video description
+      loadVideoDescription(videoId);
+    }
+    
+    async function loadVideoDescription(videoId) {
+      try {
+        const url = new URL('https://www.googleapis.com/youtube/v3/videos');
+        url.searchParams.append('part', 'snippet');
+        url.searchParams.append('id', videoId);
+        url.searchParams.append('key', YOUTUBE_API_KEY);
+        
+        const response = await fetch(url.toString());
+        if (response.ok) {
+          const data = await response.json();
+          if (data.items && data.items[0]) {
+            const desc = document.getElementById('videoDescription');
+            if (desc) {
+              desc.innerHTML = `
+                <h3>${data.items[0].snippet.title}</h3>
+                <p><strong>Channel:</strong> ${data.items[0].snippet.channelTitle}</p>
+                <p>${data.items[0].snippet.description.substring(0, 300)}...</p>
+              `;
+            }
+          }
+        }
+      } catch (error) {
+        console.warn('Could not load description:', error);
+      }
+    }
+    
+    async function loadMoreVideos() {
+      const grid = document.getElementById('videoGrid');
+      if (!grid) return;
+      
+      const loadMoreBtn = document.getElementById('loadMoreBtn');
+      if (loadMoreBtn) loadMoreBtn.textContent = '⏳ Loading...';
+      
+      const searchInput = document.getElementById('searchInput');
+      const query = searchInput?.value || 'programming tutorial';
+      
+      const videos = await fetchYouTubeVideos(query, 4);
+      
+      if (videos.length > 0) {
+        grid.innerHTML += videos.map(v => createVideoCard(v)).join('');
+      }
+      
+      if (loadMoreBtn) {
+        loadMoreBtn.textContent = '📥 Load More Videos';
+        loadMoreBtn.style.display = nextPageToken ? 'inline-flex' : 'none';
+      }
+    }
+    
+    function handleSearch(query) {
+      clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(async () => {
+        const grid = document.getElementById('videoGrid');
+        if (!grid) return;
+        
+        if (query.length < 2) {
+          loadVideoGrid('programming tutorial');
+          return;
+        }
+        
+        grid.innerHTML = '<div class="loading-spinner"></div>';
+        const videos = await fetchYouTubeVideos(`${query} tutorial programming`, 8);
+        
+        if (videos.length === 0) {
+          grid.innerHTML = '<div class="error-message">⚠️ No videos found for "' + query + '". Try a different search.</div>';
+          return;
+        }
+        
+        grid.innerHTML = videos.map(v => createVideoCard(v)).join('');
+      }, 500);
+    }
+    
+    function searchCategory(category) {
+      currentCategory = category;
+      const searchInput = document.getElementById('searchInput');
+      const grid = document.getElementById('videoGrid');
+      
+      if (category === 'all') {
+        if (searchInput) searchInput.value = '';
+        if (grid) grid.innerHTML = '<div class="loading-spinner"></div>';
+        loadVideoGrid('programming tutorial');
+        return;
+      }
+      
+      const query = CATEGORIES[category] || `${category} programming tutorial`;
+      if (searchInput) searchInput.value = query;
+      if (grid) grid.innerHTML = '<div class="loading-spinner"></div>';
+      loadVideoGrid(query);
+    }
+    
+    function setFilter(filter, buttonElement) {
+      currentFilter = filter;
+      
+      // Update active button
+      document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+      if (buttonElement) buttonElement.classList.add('active');
+      
+      // Reload videos with new filter
+      const searchInput = document.getElementById('searchInput');
+      const query = searchInput?.value || 'programming tutorial';
+      const grid = document.getElementById('videoGrid');
+      if (grid) grid.innerHTML = '<div class="loading-spinner"></div>';
+      loadVideoGrid(query);
+    }
+    
+    function createVideoCard(video) {
+      const videoId = video.id;
+      const title = video.title.length > 55 ? video.title.substring(0, 52) + '...' : video.title;
+      const channel = video.channelTitle;
+      const thumbnail = video.thumbnails?.medium?.url || video.thumbnails?.default?.url || '';
+      const views = formatViews(video.viewCount);
+      const duration = formatDuration(video.duration);
+      const published = formatDate(video.publishedAt);
+      
+      return `
+        <div class="card glass">
+          <div style="position:relative;">
+            <img src="${thumbnail}" alt="${title}" class="video-thumb" loading="lazy" 
+                 onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22320%22 height=%22180%22><rect fill=%22%236e45e2%22 width=%22320%22 height=%22180%22/><text x=%22160%22 y=%2290%22 text-anchor=%22middle%22 fill=%22white%22 font-size=%2216%22>Video Thumbnail</text></svg>'">
+            ${duration ? `<span style="position:absolute;bottom:0.5rem;right:0.5rem;background:rgba(0,0,0,0.8);color:white;padding:0.2rem 0.5rem;border-radius:0.3rem;font-size:0.8rem;">${duration}</span>` : ''}
+          </div>
+          <h4 style="margin:0.5rem 0;font-size:0.95rem;line-height:1.3;">${title}</h4>
+          <div style="display:flex;justify-content:space-between;align-items:center;font-size:0.85rem;opacity:0.7;">
+            <span>${channel}</span>
+            <span>${views}</span>
+          </div>
+          <small style="opacity:0.6;">${published}</small>
+          <button class="btn" onclick="navigate('watch',{videoId:'${videoId}'})" style="margin-top:0.8rem;width:100%;">
+            ▶ Watch Now
+          </button>
+        </div>
+      `;
+    }
+    
+    // ==================== USER ACTIONS ====================
+    function bookmarkVideo(videoId) {
+      if (!bookmarks.includes(videoId)) {
+        bookmarks.push(videoId);
+        showToast('🔖 Video bookmarked!');
+      } else {
+        bookmarks = bookmarks.filter(id => id !== videoId);
+        showToast('🔖 Bookmark removed');
+      }
+      localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+      
+      // Update button text
+      const btn = document.getElementById('bookmarkBtn');
+      if (btn) {
+        btn.textContent = bookmarks.includes(videoId) ? '🔖 Bookmarked' : '🔖 Bookmark';
+      }
+    }
+    
+    function favoriteVideo(videoId) {
+      if (!favorites.includes(videoId)) {
+        favorites.push(videoId);
+        showToast('❤️ Added to favorites!');
+      } else {
+        favorites = favorites.filter(id => id !== videoId);
+        showToast('❤️ Removed from favorites');
+      }
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+      
+      // Update button text
+      const btn = document.getElementById('favoriteBtn');
+      if (btn) {
+        btn.textContent = favorites.includes(videoId) ? '❤️ Favorited' : '❤️ Favorite';
+      }
+    }
+    
+    function addToRecentlyWatched(videoId) {
+      recentlyWatched = recentlyWatched.filter(id => id !== videoId);
+      recentlyWatched.unshift(videoId);
+      if (recentlyWatched.length > 20) recentlyWatched.pop();
+      localStorage.setItem('recentlyWatched', JSON.stringify(recentlyWatched));
+    }
+    
+    function copyShareLink(videoId) {
+      const url = `${window.location.origin}${window.location.pathname}?page=watch&videoId=${videoId}`;
+      navigator.clipboard.writeText(url).then(() => {
+        showToast('🔗 Link copied to clipboard!');
+      }).catch(() => {
+        const input = document.createElement('input');
+        input.value = url;
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand('copy');
+        document.body.removeChild(input);
+        showToast('🔗 Link copied!');
+      });
+    }
+    
+    function watchPrevious() {
+      if (recentlyWatched.length > 1) {
+        const currentId = new URLSearchParams(window.location.search).get('videoId') || recentlyWatched[0];
+        const currentIndex = recentlyWatched.indexOf(currentId);
+        if (currentIndex < recentlyWatched.length - 1) {
+          navigate('watch', { videoId: recentlyWatched[currentIndex + 1] });
+        } else {
+          showToast('No previous video in history');
+        }
+      } else {
+        showToast('No watch history available');
+      }
+    }
+    
+    function watchNext() {
+      if (recentlyWatched.length > 1) {
+        const currentId = new URLSearchParams(window.location.search).get('videoId') || recentlyWatched[0];
+        const currentIndex = recentlyWatched.indexOf(currentId);
+        if (currentIndex > 0) {
+          navigate('watch', { videoId: recentlyWatched[currentIndex - 1] });
+        } else {
+          showToast('No next video in history');
+        }
+      } else {
+        showToast('No watch history available');
+      }
+    }
+    
+    // ==================== KEYBOARD SHORTCUTS ====================
+    document.addEventListener('keydown', (e) => {
+      // Ctrl+T = Toggle theme
+      if (e.ctrlKey && e.key === 't') {
+        e.preventDefault();
+        toggleTheme();
+      }
+      // Escape = Close sidebar
+      if (e.key === 'Escape') {
+        document.getElementById('sidebar').classList.remove('open');
+      }
+      // Ctrl+H = Go home
+      if (e.ctrlKey && e.key === 'h') {
+        e.preventDefault();
+        navigate('home');
+      }
+      // Ctrl+K = Focus search
+      if (e.ctrlKey && e.key === 'k') {
+        e.preventDefault();
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput) searchInput.focus();
+      }
+    });
+    
+    // ==================== INITIALIZATION ====================
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const pageParam = urlParams.get('page');
+      const videoId = urlParams.get('videoId');
+      
+      if (pageParam) {
+        navigate(pageParam, { videoId });
+      } else {
+        navigate('home');
+      }
+    });
+    
+    // Handle browser back/forward
+    window.addEventListener('popstate', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const pageParam = urlParams.get('page') || 'home';
+      const videoId = urlParams.get('videoId');
+      navigate(pageParam, { videoId });
+    });
+    
+    // Update URL on navigation
+    const originalNavigate = navigate;
+    navigate = function(page, params = {}) {
+      const url = new URL(window.location);
+      url.searchParams.set('page', page);
+      if (params.videoId) {
+        url.searchParams.set('videoId', params.videoId);
+      } else {
+        url.searchParams.delete('videoId');
+      }
+      window.history.pushState({}, '', url);
+      originalNavigate(page, params);
+    };
+    
+    // Log API key status
+    console.log('✅ YEASIN TECHVERSE initialized');
+    console.log('🔑 API Key loaded:', YOUTUBE_API_KEY.substring(0, 10) + '...');
+    console.log('📊 Ready to fetch videos!');
+  </script>
+</body>
+</html>
